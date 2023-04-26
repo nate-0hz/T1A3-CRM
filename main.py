@@ -9,7 +9,7 @@ main_menu = { "1": "View Contacts",
               "Q": "Quit CRaM",
              }
 
-VALID_MAIN_MENU_OPTIONS = ("1", "2", "3", "0", "Q")
+VALID_MAIN_MENU_OPTIONS = main_menu.keys()
 project_name = "CRaM"
 project_welcome = "Welcome to CRaM, the best CRM in 2023."
 project_underline = 12 * "="
@@ -34,8 +34,18 @@ def welcome():
     for item in main_menu:
         print(f"{item}. {main_menu.get(item)}")
     main_menu_selection = input("> ")
+    print(f"in-function-welcome {main_menu_selection}") # test
     return main_menu_selection
+
+def menu_selection(main_menu_selection):
+    for main_menu_selection in main_menu.fromkeys(main_menu_selection):
+        print(f"in-function-selection {main_menu_selection}") # test
+
 
 
 welcome()
 print(main_menu_selection)
+# print(VALID_MAIN_MENU_OPTIONS)
+
+menu_selection(main_menu_selection)
+
