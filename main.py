@@ -1,8 +1,11 @@
 # 345678901234567890123456789012345678901234567890123456789012345678900123456789
+#import os to clear terminal, sys for clean exit, and time for sleep
 import os
 import sys
 import time
+import keyboard
 # from help import main_menu_help
+from help import MainMenuHelp
 
 main_menu = { "1": "View Contacts",
               "2": "Add Contacts",
@@ -18,7 +21,7 @@ project_underline = 12 * "="
 project_main_menu_heading = "Main Menu:"
 PROJECT_INVALID_SELECTION = "That is not an option. Please try again."
 
-main_menu_input = ""
+# main_menu_input = "" # Test for removal
 upcoming_brithdays = []
 upcoming_contacts =[]
 
@@ -50,19 +53,21 @@ def main_menu_selection():
 
 # actions main menu input
 def action_main_menu(menu_selection):
-    if menu_selection == VALID_MAIN_MENU_OPTIONS:
-        print(f"action_main_menu: {menu_selection}") # test
-    elif menu_selection == "2":
-        print(f"action_main_menu: {menu_selection}") # test
-    elif menu_selection == "3":
-        print(f"action_main_menu: {menu_selection}") # test
-    elif menu_selection == "9":
-        print(f"action_main_menu: {menu_selection}") # test
-    elif menu_selection == "0":
-        print(f"action_main_menu: {menu_selection}") # test
-        sys.exit()
-    else:
-        print(f"action_main_menu: {menu_selection}") # test
+    while True:
+        if menu_selection == VALID_MAIN_MENU_OPTIONS:
+            print(f"action_main_menu: {menu_selection}") # test
+        elif menu_selection == "2":
+            print(f"action_main_menu: {menu_selection}") # test
+        elif menu_selection == "3":
+            print(f"action_main_menu: {menu_selection}") # test
+        elif menu_selection == "9":
+            os.system("clear")
+            MainMenuHelp()
+            return input(keyboard.send("enter"))
+        elif menu_selection == "0":
+            sys.exit()
+        else:
+            print(f"action_main_menu: {menu_selection}") # test
 
 
 menu_selection = main_menu_selection()

@@ -1,0 +1,12 @@
+CRaM Main Menu
+==============
+
+You are at the main menu of CRaM.
+
+(1) - To view or search through your contacts, type 1 then press enter.
+(2) - To add a new contact to your CRaM, type 2 then press enter.
+(3) - To edit existing contacts, type 3 then press enter.
+(9) - You know what this does. Entering 9 brings up help information. Like this. Magic.
+(0) - To quit CRaM and return to your terminal, type 0 then press enter.
+
+Press any key to return to the menu.
