@@ -1,11 +1,14 @@
 # 345678901234567890123456789012345678901234567890123456789012345678900123456789
-#import os to clear terminal, sys for clean exit, and time for sleep
+# import os to clear terminal, 
+# import sys for a clean exit, 
+# import time for sleep
 import os
 import sys
 import time
 import keyboard
-# from help import main_menu_help
-from help import MainMenuHelp
+
+# importing created modules
+import help
 
 main_menu = { "1": "View Contacts",
               "2": "Add Contacts",
@@ -14,22 +17,21 @@ main_menu = { "1": "View Contacts",
               "0": "Quit CRaM",
              }
 
-VALID_MAIN_MENU_OPTIONS = main_menu.keys()
+# Variables and contastant definitions
+VALID_MAIN_MENU_OPTIONS = list(main_menu.keys())
 project_name = "CRaM"
 project_welcome = "Welcome to CRaM, the best CRM in 2023."
-project_underline = 12 * "="
 project_main_menu_heading = "Main Menu:"
 PROJECT_INVALID_SELECTION = "That is not an option. Please try again."
-
-# main_menu_input = "" # Test for removal
 upcoming_brithdays = []
-upcoming_contacts =[]
+upcoming_contacts = []
 
 # Creates standard centred underline
+project_underline = 12 * "="
 def underline_centre():
     print(f"{project_underline.center(80)}\n")
 
-# Clears terminal screen and presents welcome message
+# Clears terminal and presents welcome message
 def welcome():
     os.system('clear')
     print(f"{project_name.center(80)}\n")
@@ -37,7 +39,7 @@ def welcome():
     print(f"{project_welcome.center(80)}\n")
     underline_centre()
 
-# takes input from main menu
+# takes presents main menu and takes input
 def main_menu_selection():
     while True:
         welcome()
@@ -54,20 +56,23 @@ def main_menu_selection():
 # actions main menu input
 def action_main_menu(menu_selection):
     while True:
-        if menu_selection == VALID_MAIN_MENU_OPTIONS:
+        if menu_selection == VALID_MAIN_MENU_OPTIONS[0]:
             print(f"action_main_menu: {menu_selection}") # test
-        elif menu_selection == "2":
+            break
+        elif menu_selection == VALID_MAIN_MENU_OPTIONS[1]:
             print(f"action_main_menu: {menu_selection}") # test
-        elif menu_selection == "3":
+        elif menu_selection == VALID_MAIN_MENU_OPTIONS[2]:
             print(f"action_main_menu: {menu_selection}") # test
-        elif menu_selection == "9":
+        elif menu_selection == VALID_MAIN_MENU_OPTIONS[3]:
             os.system("clear")
-            MainMenuHelp()
-            return input(keyboard.send("enter"))
-        elif menu_selection == "0":
+            help.MainMenuHelp()
+            return input(keyboard.send("enter")) ### TODO - Fix, does not work ###
+        elif menu_selection == VALID_MAIN_MENU_OPTIONS[4]:
+            os.system("clear")
+            print(f"Thanks for using {project_name}")
             sys.exit()
-        else:
-            print(f"action_main_menu: {menu_selection}") # test
+        # else:
+        #     print(f"action_main_menu: {menu_selection}") # test
 
 
 menu_selection = main_menu_selection()
