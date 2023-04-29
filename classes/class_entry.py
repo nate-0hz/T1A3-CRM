@@ -7,9 +7,3 @@ class Entry:
         self.birthday = birthday
         self.last_contact = last_contact
         self.next_contact = next_contact
-
-print("Add a contact.")
-input_name = input("What is the name to add? ")
-#####
-# enter function to check if name exists
-#####
