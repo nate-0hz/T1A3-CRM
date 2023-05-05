@@ -6,8 +6,8 @@ import time
 import menu_modules.help as help
 
 
-df_temp = "../cram_storage_temp.csv"
-df_temp_clean = "../cram_storage_temp_clean.csv"
+df_temp = "./cram_storage_temp.csv"
+df_temp_clean = "./cram_storage_temp_clean.csv"
 cram_columns = ["first_name", "last_name", "phone", "company", "email", "birthday", "last_contact", "next_contact"]
 cram_storage_file = "cram_storage3.csv" ### change to cram storage
 cram_storage_view = pd.read_csv(cram_storage_file)
@@ -43,7 +43,7 @@ def search_sub():
                         writer = csv.writer(file_temp)
                         writer.writerow(row)
                 else:
-                    break
+                    pass ### revisit this ###
 
 # function to remove duplicates from temp csv file
 def remove_duplicates():
@@ -59,6 +59,8 @@ def display_search():
     df = pd.read_csv(df_temp_clean)
     if df.empty == False:
         print(df)
+        input("Press enter to continue ... ")
+        clear_terminal()
     else:
         print("No matches found.")
 
@@ -111,17 +113,10 @@ def view_all_with_sort():
 view_menu = { "1": "View all Contacts",
               "2": "Search Contacts",
               "9": "Help",
-              "0": "Quit CRaM",
+              "0": "Go Back",
              }
 
 view_menu_options = list(view_menu.keys())
-
-    # search = input("What search: ")
-    # clear_temp()
-    # search_sub()
-    # remove_duplicates()
-    # display_search()
-
 
 def view_menu_selection():
     print(f"View Contacts:")
@@ -135,6 +130,7 @@ def view_menu_selection():
         time.sleep(1)
 
 def action_view_menu(menu_selection):
+    clear_terminal()
     if menu_selection == view_menu_options[0]: # View all
         view_all_with_sort()
     elif menu_selection == view_menu_options[1]: # Search
@@ -146,17 +142,21 @@ def action_view_menu(menu_selection):
         input("\nPress enter to continue ... ")
         clear_terminal()
     elif menu_selection == view_menu_options[3]: # Go back
-        # help.MainMenuHelp()
-        # break
-    # elif menu_selection == main_menu_options[4]: # Quit
-    #     os.system("clear")
-    #     print(f"Thanks for using CRaM.")
-    #     sys.exit()
+        print()
+    else:
+        print(f"\n{invalid_selection}\n")
+        time.sleep(1)
 
 ############
 # View Menu Flow
 ############
 
 def view_flow():
+    menu_selection = ""
+    while menu_selection != "0":
+        clear_terminal()
         menu_selection = view_menu_selection()
         action_view_menu(menu_selection)
+    return
+            
+        
