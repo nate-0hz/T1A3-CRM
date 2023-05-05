@@ -3,16 +3,22 @@ import csv
 import os
 import time
 
+import menu_modules.help as help
+
+
 df_temp = "../cram_storage_temp.csv"
 df_temp_clean = "../cram_storage_temp_clean.csv"
-cram_columns = ["fname", "lname", "phone", "company", "email", "birthday", "last_contact", "next_contact"]
+cram_columns = ["first_name", "last_name", "phone", "company", "email", "birthday", "last_contact", "next_contact"]
 cram_storage_file = "cram_storage3.csv" ### change to cram storage
 cram_storage_view = pd.read_csv(cram_storage_file)
 invalid_selection = "That is not an option. Please try again."
 
-############
+def clear_terminal(): 
+    os.system("clear")
+
+#######################################################################################################
 # Search sequence
-############
+#######################################################################################################
 
 # function to clear temp csv file
 def clear_temp():
@@ -62,30 +68,45 @@ def execute_search():
     remove_duplicates()
     display_search()
 
-############
+#######################################################################################################
 # Display Records sequence
-############
+#######################################################################################################
 
 def view_all_with_sort():
+    clear_terminal()
     print("")
     print("View Menu:")
-    while True:
-        for column in cram_columns:
-            print(f" {int(cram_columns.index(column)) +1 }. To sort by {column}") # start menu options at 1
-        print(" 9. Help\n", "0. Go back")
-        sort_by = int(input("> ")) - 1 # convert selection to index
+
+    clear_terminal()
+    for column in cram_columns:
+        print(f" {int(cram_columns.index(column)) +1 }. To sort by {column}") # start menu options at 1
+    print(" 9. Help\n", "0. Go back")
+    sort_by = int(input("> ")) - 1 # subtract 1 to align with index
+    if 0 <= (sort_by) <= 7:
         cram_storage_view.sort_values(cram_columns[sort_by],
                                 axis=0,
                                 ascending=[True],
                                 inplace=True)
-        os.system("clear")
-        print(f"\nOrdered by {column}:")
+        clear_terminal()
+        pd.options.display.max_rows = None
+        pd.options.display.width = None
         print(cram_storage_view)
-        print("\nPress enter to continue ... ")
+        print(f"\n{len(cram_storage_view)} records, ordered by {cram_columns[sort_by]}.")
+        input("\nPress enter to continue ... ")
+    elif (sort_by) == 8:
+        clear_terminal()
+        help.view_all_help.display_help()
+        input("\nPress enter to continue ... ")
+        clear_terminal()
+    elif sort_by == -1:
+        return
+    else:
+        print(f"\n{invalid_selection}\n")
+        time.sleep(1)
 
-############
+#######################################################################################################
 # View Records Sub-Menu
-############
+#######################################################################################################
 
 view_menu = { "1": "View all Contacts",
               "2": "Search Contacts",
@@ -103,31 +124,28 @@ view_menu_options = list(view_menu.keys())
 
 
 def view_menu_selection():
-    while True:
-        print(f"View Contacts:")
-        for item in view_menu:
-            print(f"{item}. {view_menu.get(item)}")
-        view_selection = input("> ")
-        if view_selection in view_menu_options:
-            return(view_selection)
-        else:
-            print(f"\n{invalid_selection}\n")
-            time.sleep(1)
+    print(f"View Contacts:")
+    for item in view_menu:
+        print(f"{item}. {view_menu.get(item)}")
+    view_selection = input("> ")
+    if view_selection in view_menu_options:
+        return(view_selection)
+    else:
+        print(f"\n{invalid_selection}\n")
+        time.sleep(1)
 
 def action_view_menu(menu_selection):
     if menu_selection == view_menu_options[0]: # View all
-        print("View all contacts.")
         view_all_with_sort()
-        # break
     elif menu_selection == view_menu_options[1]: # Search
         print("Search contacts.")
         execute_search()
-        # break
     elif menu_selection == view_menu_options[2]: # Help
-        print(f"help") # test
-        # break
-    elif menu_selection == main_menu_options[3]: # Go back
-        return
+        clear_terminal()
+        help.view_menu_help.display_help()
+        input("\nPress enter to continue ... ")
+        clear_terminal()
+    elif menu_selection == view_menu_options[3]: # Go back
         # help.MainMenuHelp()
         # break
     # elif menu_selection == main_menu_options[4]: # Quit
@@ -140,6 +158,5 @@ def action_view_menu(menu_selection):
 ############
 
 def view_flow():
-    while True:
         menu_selection = view_menu_selection()
         action_view_menu(menu_selection)

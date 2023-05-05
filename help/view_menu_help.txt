@@ -1,0 +1,9 @@
+CRaM View Menu
+==============
+
+You are at the view menu of CRaM.
+
+(1) - View all contacts. You can order them by column in ascending order.
+(2) - Search through CRaM for a contact that contains the search term you enter.
+(9) - You know what this does. Entering 9 brings up help information. Like this. Magic.
+(0) - To go back to the main menu, type 0 then press enter.

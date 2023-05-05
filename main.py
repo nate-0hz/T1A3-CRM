@@ -20,9 +20,9 @@ import pandas as pd
 #######################################################################################################
 
 # main menu dict
-main_menu = { "1": "View Contact",
-              "2": "Add Contact",
-              "3": "Edit Contact",
+main_menu = { "1": "View Contacts",
+              "2": "Add Contacts",
+              "3": "Edit Contacts",
               "9": "Help",
               "0": "Quit CRaM",
              }
@@ -30,7 +30,7 @@ main_menu = { "1": "View Contact",
 # Variables and contastant definitions
 main_menu_options = list(main_menu.keys())
 invalid_selection = "That is not an option. Please try again."
-cram_columns = ["fname", "lname", "phone", "company", "email", "birthday", "last_contact", "next_contact"]
+# cram_columns = ["first_name", "last_name", "phone", "company", "email", "birthday", "last_contact", "next_contact"]
 upcoming_brithdays = []
 upcoming_contacts = []
 cram_file = "cram_storage3.csv" ### Change this ###
@@ -52,7 +52,7 @@ def file_check():
         if create_storage == "y":
             with open(cram_file, "w") as f:
                 writer = csv.writer(f)
-                writer.writerow(cram_columns)
+                writer.writerow(cram_columns) ### Revisit this ###
                 f.close()
         else:
             os.system("clear")
@@ -98,7 +98,8 @@ def action_main_menu(menu_selection):
         # break
     elif menu_selection == main_menu_options[3]: # Help
         os.system("clear")
-        help.MainMenuHelp()
+        help.main_menu_help.display_help()
+        input("\nPress enter to continue ... ")
         # break
     elif menu_selection == main_menu_options[4]: # Quit
         os.system("clear")

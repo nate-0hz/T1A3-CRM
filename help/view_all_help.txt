@@ -1,0 +1,6 @@
+CRaM "View All Records" Menu Help
+=================================
+
+This is the menu to view all records in CRaM. CRaM can order your records by a column of your choosing in ascending order.
+
+Select the number next to the column you wish to order by. If you wish to order by the same column in descending order.

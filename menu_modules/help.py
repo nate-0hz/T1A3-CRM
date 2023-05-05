@@ -1,11 +1,17 @@
-class Help:
-    def __init__(self, name, help_text_file):
-        self.name = name
-        self.help_text = help_text_file
+class Help(object):
+    def __init__(self, help_text):
+        self.help_text = help_text
+
+    def display_help(self):
+        with open(self.help_text, "r") as f:
+            for lines in f:
+                print(lines)
+            f.close()
 
 
-class MainMenuHelp(Help):
-    def __init__(self):
-        help_text = open("./help/main_menu_help.txt")
-        for help in help_text.readlines():
-            print(help)
+main_menu_help = Help("./help/main_menu_help.txt")
+view_menu_help = Help("./help/view_menu_help.txt")
+view_all_help = Help("./help/view_all_help.txt")
+
+
+
