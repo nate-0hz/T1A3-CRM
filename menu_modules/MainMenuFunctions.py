@@ -3,8 +3,12 @@
 import os
 import time
 import csv
+import sys
+import pandas as pd
 
 # importing created modules
+import classes.class_record as record
+
 
 #######################################################################################################
 # Main Menu
@@ -19,26 +23,32 @@ main_menu = { "1": "View Contact",
              }
 
 # Variables and contastant definitions
-project_name = "CRaM"  
 menu_options = list(main_menu.keys())
 invalid_selection = "That is not an option. Please try again."
+cram_columns = ["fname", "lname", "phone", "company", "email", "birthday", "last_contact", "next_contact"]
 upcoming_brithdays = []
 upcoming_contacts = []
 cram_file = "cram_storage.csv"
 
+cram_storage_view = pd.read_csv(cram_file)
+
+def cram_storage_new():
+            with open(cram_file, "w") as f:
+                writer = csv.writer(f)
+                writer.writerow(cram_columns)
+                f.close()
+
 # checks if cram_storage.csv exists
 def file_check():
     try:
-        cram_storage = open(cram_file, "r")
-        cram_storage.close()
+        pd.read_csv(cram_file)
+        # cram_storage_read
     except FileNotFoundError:
         os.system("clear")
         print("You do not have a database for CRaM.")
         create_storage = input("Would you like to create one now? (y/n): ")
         if create_storage == "y":
-            cram_storage = open(cram_file, "w")
-            cram_storage.write(f"name,phone,company,email,birthday,last_contact,next_contact\n")
-            cram_storage.close()
+            cram_storage_new()
         else:
             os.system("clear")
             print("CRaM cannot continue without a database.")
@@ -51,9 +61,8 @@ def underline_centre():
 
 # Clears terminal and presents welcome message
 def welcome():
-    project_welcome = f"Welcome to {project_name}, the best CRM in 2023."
+    project_welcome = f"Welcome to CRaM, the best CRM in 2023."
     os.system('clear')
-    print(f"{project_name.center(80)}\n")
     underline_centre()
     print(f"{project_welcome.center(80)}\n")
     underline_centre()
@@ -113,3 +122,21 @@ def gather_details(input_name):
 #######################################################################################################
 # View Records
 #######################################################################################################
+
+# View all records, with sort by
+def view_all_with_sort():
+    print("")
+    print("View Menu:")
+    while True:
+        for column in cram_columns:
+            print(f" {int(cram_columns.index(column)) +1 }. To sort by {column}") # start menu options at 1
+        print(" 9. Help\n", "0. Go back")
+        sort_by = int(input("> ")) - 1 # convert selection to index
+        cram_storage_view.sort_values(cram_columns[sort_by],
+                                axis=0,
+                                ascending=[True],
+                                inplace=True)
+        os.system("clear")
+        print(f"\nOrdered by {column}:")
+        print(cram_storage_view)
+        print("\nPress enter to continue ... ")

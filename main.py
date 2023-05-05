@@ -8,6 +8,7 @@ import menu_modules.help as help
 # import sys for clean exit, import os to clear terminal
 import sys
 import os
+import pandas as pd
 
 #######################################################################################################
 # Main menu flow
