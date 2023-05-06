@@ -8,8 +8,6 @@ import menu_modules.shared_variables as shvar
 
 
 
-
-df_temp_clean = "./data_files/cram_storage_temp_clean.csv"
 invalid_selection = "That is not an option. Please try again."
 cram_storage_view = pd.read_csv(shvar.cram_storage_file)
 
@@ -21,43 +19,41 @@ def clear_terminal():
 # Search sequence
 #######################################################################################################
 
-# function to clear temp csv file
-def clear_temp():
-    with open(df_temp, "w") as f:
-        writer = csv.writer(f)
-        writer.writerow(shvar.cram_columns)
-        f.close()
+# # function to clear temp csv file
+# def clear_temp():
+#     with open(shvar.df_temp, "w") as f:
+#         writer = csv.writer(f)
+#         writer.writerow(shvar.cram_columns)
+#         f.close()
 
-# function to search for sub-string in csv file and add rows to temp csv file
-def search_sub():
-    search = input("Type what you would like to search for: ")
-    # Clear temp file
-    clear_temp()
-    # Read storage file
-    with open(shvar.cram_storage_file, "r") as file:
-        reader = csv.reader(file)
-        reader.__next__()
-        for row in reader:
-            for i in row:
-                if i.find(search) != -1 or i.find(search.capitalize()) != -1 or i.find(search.lower()) != -1 or i.find(search.upper()) != -1:
-                    with open(shvar.df_temp, "a") as file_temp:
-                        writer = csv.writer(file_temp)
-                        writer.writerow(row)
-                else:
-                    pass ### revisit this ###
+# # function to search for sub-string in csv file and add rows to temp csv file
+# def search_sub():
+#     search = input("Type what you would like to search for: ")
+#     # Clear temp file
+#     shvar.clear_temp()
+#     # Read storage file
+#     with open(shvar.cram_storage_file, "r") as file:
+#         reader = csv.reader(file)
+#         reader.__next__()
+#         for row in reader:
+#             for i in row:
+#                 if i.find(search) != -1 or i.find(search.capitalize()) != -1 or i.find(search.lower()) != -1 or i.find(search.upper()) != -1:
+#                     with open(shvar.df_temp, "a") as file_temp:
+#                         writer = csv.writer(file_temp)
+#                         writer.writerow(row)
 
-# function to remove duplicates from temp csv file
-def remove_duplicates():
-    # Read temp file
-    df = pd.read_csv(shvar.df_temp, sep=",")
-    df.drop_duplicates(subset=None, keep="first", inplace=True)
-    # Write to clean temp file
-    df.to_csv(df_temp_clean, index=False)
+# # function to remove duplicates from temp csv file
+# def remove_duplicates():
+#     # Read temp file
+#     df = pd.read_csv(shvar.df_temp, sep=",")
+#     df.drop_duplicates(subset=None, keep="first", inplace=True)
+#     # Write to clean temp file
+#     df.to_csv(shvar.df_temp_clean, index=False)
 
 # function to display search results from temp csv file
 def display_search():
     # Read clean temp file
-    df = pd.read_csv(df_temp_clean)
+    df = pd.read_csv(shvar.df_temp_clean)
     if df.empty == False:
         print(df)
         input("Press enter to continue ... ")
@@ -66,10 +62,10 @@ def display_search():
         print("No matches found.")
 
 def execute_search():
-    clear_temp()
-    search_sub()
-    remove_duplicates()
-    display_search()
+    shvar.clear_temp()
+    shvar.search_sub()
+    shvar.remove_duplicates()
+    shvar.display_search()
 
 #######################################################################################################
 # Display Records sequence
