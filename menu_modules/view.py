@@ -4,17 +4,18 @@ import os
 import time
 
 import menu_modules.help as help
+import menu_modules.shared_variables as shvar
 
 
-df_temp = "./cram_storage_temp.csv"
-df_temp_clean = "./cram_storage_temp_clean.csv"
-cram_columns = ["first_name", "last_name", "phone", "company", "email", "birthday", "last_contact", "next_contact"]
-cram_storage_file = "cram_storage3.csv" ### change to cram storage
-cram_storage_view = pd.read_csv(cram_storage_file)
+
+df_temp = "./data_files/cram_storage_temp.csv"
+df_temp_clean = "./data_files/cram_storage_temp_clean.csv"
 invalid_selection = "That is not an option. Please try again."
+
 
 def clear_terminal(): 
     os.system("clear")
+
 
 #######################################################################################################
 # Search sequence
@@ -24,7 +25,7 @@ def clear_terminal():
 def clear_temp():
     with open(df_temp, "w") as f:
         writer = csv.writer(f)
-        writer.writerow(cram_columns)
+        writer.writerow(shvar.cram_columns)
         f.close()
 
 # function to search for sub-string in csv file and add rows to temp csv file
@@ -33,7 +34,7 @@ def search_sub():
     # Clear temp file
     clear_temp()
     # Read storage file
-    with open(cram_storage_file, "r") as file:
+    with open(shvar.cram_storage_file, "r") as file:
         reader = csv.reader(file)
         reader.__next__()
         for row in reader:
@@ -75,17 +76,14 @@ def execute_search():
 #######################################################################################################
 
 def view_all_with_sort():
+    cram_storage_view = pd.read_csv(shvar.cram_storage_file)
     clear_terminal()
-    print("")
-    print("View Menu:")
-
-    clear_terminal()
-    for column in cram_columns:
-        print(f" {int(cram_columns.index(column)) +1 }. To sort by {column}") # start menu options at 1
+    for column in shvar.cram_columns:
+        print(f" {int(shvar.cram_columns.index(column)) +1 }. To sort by {column}") # start menu options at 1
     print(" 9. Help\n", "0. Go back")
     sort_by = int(input("> ")) - 1 # subtract 1 to align with index
     if 0 <= (sort_by) <= 7:
-        cram_storage_view.sort_values(cram_columns[sort_by],
+        shvar.cram_storage_view.sort_values(shvar.cram_columns[sort_by],
                                 axis=0,
                                 ascending=[True],
                                 inplace=True)
@@ -93,7 +91,7 @@ def view_all_with_sort():
         pd.options.display.max_rows = None
         pd.options.display.width = None
         print(cram_storage_view)
-        print(f"\n{len(cram_storage_view)} records, ordered by {cram_columns[sort_by]}.")
+        print(f"\n{len(cram_storage_view)} records, ordered by {shvar.cram_columns[sort_by]}.")
         input("\nPress enter to continue ... ")
     elif (sort_by) == 8:
         clear_terminal()
@@ -147,9 +145,9 @@ def action_view_menu(menu_selection):
         print(f"\n{invalid_selection}\n")
         time.sleep(1)
 
-############
+#######################################################################################################
 # View Menu Flow
-############
+#######################################################################################################
 
 def view_flow():
     menu_selection = ""
