@@ -8,10 +8,10 @@ import menu_modules.shared_variables as shvar
 
 
 
-df_temp = "./data_files/cram_storage_temp.csv"
+
 df_temp_clean = "./data_files/cram_storage_temp_clean.csv"
 invalid_selection = "That is not an option. Please try again."
-
+cram_storage_view = pd.read_csv(shvar.cram_storage_file)
 
 def clear_terminal(): 
     os.system("clear")
@@ -40,7 +40,7 @@ def search_sub():
         for row in reader:
             for i in row:
                 if i.find(search) != -1 or i.find(search.capitalize()) != -1 or i.find(search.lower()) != -1 or i.find(search.upper()) != -1:
-                    with open(df_temp, "a") as file_temp:
+                    with open(shvar.df_temp, "a") as file_temp:
                         writer = csv.writer(file_temp)
                         writer.writerow(row)
                 else:
@@ -49,7 +49,7 @@ def search_sub():
 # function to remove duplicates from temp csv file
 def remove_duplicates():
     # Read temp file
-    df = pd.read_csv(df_temp, sep=",")
+    df = pd.read_csv(shvar.df_temp, sep=",")
     df.drop_duplicates(subset=None, keep="first", inplace=True)
     # Write to clean temp file
     df.to_csv(df_temp_clean, index=False)
@@ -83,7 +83,7 @@ def view_all_with_sort():
     print(" 9. Help\n", "0. Go back")
     sort_by = int(input("> ")) - 1 # subtract 1 to align with index
     if 0 <= (sort_by) <= 7:
-        shvar.cram_storage_view.sort_values(shvar.cram_columns[sort_by],
+        cram_storage_view.sort_values(shvar.cram_columns[sort_by],
                                 axis=0,
                                 ascending=[True],
                                 inplace=True)

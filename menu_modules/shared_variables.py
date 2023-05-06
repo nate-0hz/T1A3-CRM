@@ -5,6 +5,7 @@ import sys
 
 
 cram_storage_file = "./data_files/cram_storage.csv"
+df_temp = "./data_files/cram_storage_temp.csv"
 
 # main menu dict
 main_menu = { "1": "View Contacts",
