@@ -8,6 +8,7 @@ cram_storage_file = "../data_files/cram_storage.csv"
 df_temp = "../data_files/cram_storage_temp.csv"
 df_temp_clean = "../data_files/cram_storage_temp_clean.csv"
 
+
 # main menu dict
 main_menu = { "1": "View Contacts",
               "2": "Add Contacts",
@@ -103,5 +104,6 @@ def display_search():
         print(df)
         input("Press enter to continue ... ")
         clear_terminal()
+        return df
     else:
         print("No matches found.")
