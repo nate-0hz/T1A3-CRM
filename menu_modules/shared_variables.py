@@ -9,16 +9,10 @@ df_temp_clean = "./data_files/cram_storage_temp_clean.csv"
 invalid_selection = "That is not an option. Please try again."
 cram_columns = ["first_name", "last_name", "phone", "company", "email", 
                 "birthday", "last_contact", "next_contact"]
-main_menu_options = list(main_menu.keys())
+
 project_name = "CRaM 2023"
 
-# main menu dict
-main_menu = { "1": "View Contacts",
-              "2": "Add Contacts",
-              "3": "Edit Contacts",
-              "9": "Help",
-              "0": "Quit CRaM",
-             }
+
 
 
 # Creates standard centred underline

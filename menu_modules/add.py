@@ -14,8 +14,8 @@ import menu_modules.shared_variables as shvar
 def add_entry():
     run_loop = True
     while run_loop == True:
-        first_name = input("What is the first name of the person to add? \
-                           (Type 'exit' to go back) ")
+        first_name = input("What is the first name of the person to add? "
+                           "(Type 'exit' to go back) ")
         if first_name == "exit":
             run_loop = False
             return run_loop
@@ -24,8 +24,8 @@ def add_entry():
             with open(shvar.cram_storage_file, "r") as open_file:
                 doesExist = open_file.read()
                 if first_name and last_name in doesExist:
-                    add_new = input(f"{first_name} {last_name} already exists. \
-                                    Create new entry?(yes/no) ")
+                    add_new = input(f"{first_name} {last_name} already exists."
+                                    "Create new entry?(yes/no) ")
                     if add_new == "yes":
                         gather_details(first_name, last_name)
                         # add_another()
@@ -44,7 +44,6 @@ def add_entry():
 
 # Gather the details to add
 def gather_details(first_name, last_name):
-    check_dict = {}
     cram_storage_append = open(shvar.cram_storage_file, "a")
     phone = input("Add phone number: ")
     company = input("Add company: ")
@@ -68,7 +67,7 @@ def gather_details(first_name, last_name):
 
 def check_valid_date_100():
     attempts = 0
-
+    # checks date formatting
     while True:
         try:
             date = input("Add date (dd/mm/yy): ")

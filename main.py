@@ -17,10 +17,17 @@ import time
 # Main Menu
 ################################################################################
 
+# main menu dict
+main_menu = { "1": "View Contacts",
+              "2": "Add Contacts",
+              "3": "Edit Contacts",
+              "9": "Help",
+              "0": "Quit CRaM",
+             }
 # Variables and contastant definitions
+main_menu_options = list(main_menu.keys())
 invalid_selection = "That is not an option. Please try again."
-upcoming_brithdays = []
-upcoming_contacts = []
+
 
 # Clears terminal and presents welcome message
 def welcome():
@@ -35,33 +42,33 @@ def main_menu_selection():
     while True:
         welcome()
         print(f"Main Menu:")
-        for item in shvar.main_menu:
-            print(f"{item}. {shvar.main_menu.get(item)}")
+        for item in main_menu:
+            print(f"{item}. {main_menu.get(item)}")
         menu_selection = input("> ")
-        if menu_selection in shvar.main_menu_options:
+        if menu_selection in main_menu_options:
             return menu_selection
         else:
             print(f"\n{invalid_selection}\n")
             time.sleep(1)
 
 def action_main_menu(menu_selection):
-    if menu_selection == shvar.main_menu_options[0]: # View
+    if menu_selection == main_menu_options[0]: # View
         view.view_flow()
         # break
-    elif menu_selection == shvar.main_menu_options[1]: # Add
+    elif menu_selection == main_menu_options[1]: # Add
         print("Add a contact.")
         add.add_flow()
         # break
-    elif menu_selection == shvar.main_menu_options[2]: # Edit
+    elif menu_selection == main_menu_options[2]: # Edit
         print(f"Edit a contact.") # test
         edit.edit_flow()
         # break
-    elif menu_selection == shvar.main_menu_options[3]: # Help
+    elif menu_selection == main_menu_options[3]: # Help
         os.system("clear")
         help.main_menu_help.display_help()
         input("\nPress enter to continue ... ")
         # break
-    elif menu_selection == shvar.main_menu_options[4]: # Quit
+    elif menu_selection == main_menu_options[4]: # Quit
         os.system("clear")
         print(f"Thanks for using CRaM.")
         sys.exit()

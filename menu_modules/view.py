@@ -4,7 +4,11 @@ import time
 import menu_modules.help as help
 import menu_modules.shared_variables as shvar
 
-cram_storage_view = pd.read_csv(shvar.cram_storage_file)
+# handles file not found for cram_storage_file
+try:
+    cram_storage_view = pd.read_csv(shvar.cram_storage_file)
+except FileNotFoundError:
+    pass
 
 ################################################################################
 # Search sequence
@@ -35,10 +39,18 @@ def view_all_with_sort():
     cram_storage_view = pd.read_csv(shvar.cram_storage_file)
     shvar.clear_terminal()
     for column in shvar.cram_columns:
-        print(f" {int(shvar.cram_columns.index(column)) +1 }. \
-              To sort by {column}") # start menu options at 1
+        print(f" {int(shvar.cram_columns.index(column)) +1 }. To sort by {column}")
+            # start menu options at 1
     print(" 9. Help\n", "0. Go back")
-    sort_by = int(input("> ")) - 1 # subtract 1 to align with index
+    
+    # catch non-integer input
+    try:
+        sort_by = int(input("> ")) - 1 # subtract 1 to align with index
+    except ValueError:
+        print(f"\n{shvar.invalid_selection}\n")
+        time.sleep(1)
+        return
+    # takes menu input to progress flow. Option logic is below
     if 0 <= (sort_by) <= 7:
         cram_storage_view.sort_values(shvar.cram_columns[sort_by],
                                 axis=0,
@@ -49,7 +61,7 @@ def view_all_with_sort():
         pd.options.display.width = None
         print(cram_storage_view)
         print(f"\n{len(cram_storage_view)} records, ordered by \
-              {shvar.cram_columns[sort_by]}.")
+            {shvar.cram_columns[sort_by]}.")
         input("\nPress enter to continue ... ")
     elif (sort_by) == 8:
         shvar.clear_terminal()
@@ -60,7 +72,7 @@ def view_all_with_sort():
         return
     else:
         print(f"\n{shvar.invalid_selection}\n")
-        time.sleep(1)
+        # time.sleep(1)
 
 ################################################################################
 # View Records Sub-Menu
