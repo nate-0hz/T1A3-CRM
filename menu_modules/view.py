@@ -60,8 +60,8 @@ def view_all_with_sort():
         pd.options.display.max_rows = None
         pd.options.display.width = None
         print(cram_storage_view)
-        print(f"\n{len(cram_storage_view)} records, ordered by \
-            {shvar.cram_columns[sort_by]}.")
+        print(f"\n{len(cram_storage_view)} records, ordered by "
+            f"{shvar.cram_columns[sort_by]}.")
         input("\nPress enter to continue ... ")
     elif (sort_by) == 8:
         shvar.clear_terminal()

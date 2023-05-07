@@ -24,7 +24,7 @@ def add_entry():
             with open(shvar.cram_storage_file, "r") as open_file:
                 doesExist = open_file.read()
                 if first_name and last_name in doesExist:
-                    add_new = input(f"{first_name} {last_name} already exists."
+                    add_new = input(f"{first_name} {last_name} already exists. "
                                     "Create new entry?(yes/no) ")
                     if add_new == "yes":
                         gather_details(first_name, last_name)

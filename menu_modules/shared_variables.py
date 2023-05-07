@@ -2,18 +2,16 @@
 import pandas as pd
 import os
 import csv
+import time
 
 cram_storage_file = "./data_files/cram_storage.csv"
 df_temp = "./data_files/cram_storage_temp.csv"
 df_temp_clean = "./data_files/cram_storage_temp_clean.csv"
 invalid_selection = "That is not an option. Please try again."
-cram_columns = ["first_name", "last_name", "phone", "company", "email", 
-                "birthday", "last_contact", "next_contact"]
+cram_columns = ["first_name", "last_name", "phone", "company", "email",
+    "birthday", "last_contact", "next_contact"]
 
 project_name = "CRaM 2023"
-
-
-
 
 # Creates standard centred underline
 def underline_centre():
@@ -43,7 +41,7 @@ def file_check():
         print("Created cram_storage.csv")
         with open("./data_files/cram_storage.csv", "a") as f:
             writer = csv.writer(f)
-            writer.writerow(cram_columns) ### Revisit this ###
+            writer.writerow(cram_columns)
             # f.close()
     finally:
         return
@@ -83,4 +81,5 @@ def display_search():
         clear_terminal()
         return df
     else:
-        print("No matches found.")
+        print("No matches found. Returning to View Menu")
+        time.sleep(1)
