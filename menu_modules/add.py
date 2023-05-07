@@ -3,7 +3,6 @@ import csv
 import time
 import dateutil.parser
 
-import menu_modules.help as help
 import menu_modules.shared_variables as shvar
 
 ################################################################################
