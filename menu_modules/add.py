@@ -1,11 +1,9 @@
-import pandas as pd
 import csv
 import time
 import dateutil.parser
 
 import menu_modules.help as help
 import menu_modules.shared_variables as shvar
-import classes.class_record as cr
 
 #######################################################################################################
 # Functions used to add entry
