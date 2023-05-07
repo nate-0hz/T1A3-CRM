@@ -1,7 +1,6 @@
 # 345678901234567890123456789012345678901234567890123456789012345678900123456789
 import pandas as pd
 import time
-
 import menu_modules.shared_variables as shvar
 
 editing_dict = {}
@@ -55,11 +54,10 @@ def edit_record(editing_dict, chosen_record):
     print("\nRecord updated. Returning to Main Menu.")
     time.sleep(1)
 
-
-
 ################################################################################
 # Edit Flow
 ################################################################################
+
 
 def edit_flow():
     shvar.clear_terminal()
@@ -71,3 +69,5 @@ def edit_flow():
     chosen_record = edit_list(results_list)
     editing_dict = make_dict(chosen_record)
     edit_record(editing_dict, chosen_record)
+
+    

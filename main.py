@@ -13,7 +13,6 @@ import sys
 import os
 import time
 
-
 ################################################################################
 # Main Menu
 ################################################################################
@@ -22,8 +21,6 @@ import time
 invalid_selection = "That is not an option. Please try again."
 upcoming_brithdays = []
 upcoming_contacts = []
-# cram_columns imported from view.py
-# cram_storage_file imported from view.py
 
 # Clears terminal and presents welcome message
 def welcome():
@@ -69,11 +66,9 @@ def action_main_menu(menu_selection):
         print(f"Thanks for using CRaM.")
         sys.exit()
 
-
 ################################################################################
 # Main menu flow
 ################################################################################
-
 
 def main_flow():
     while True:
@@ -83,3 +78,4 @@ def main_flow():
 
 shvar.file_check()
 main_flow()
+

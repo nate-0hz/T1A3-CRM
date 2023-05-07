@@ -3,13 +3,14 @@ import pandas as pd
 import os
 import csv
 
-
-
 cram_storage_file = "./data_files/cram_storage.csv"
 df_temp = "./data_files/cram_storage_temp.csv"
 df_temp_clean = "./data_files/cram_storage_temp_clean.csv"
 invalid_selection = "That is not an option. Please try again."
-
+cram_columns = ["first_name", "last_name", "phone", "company", "email", 
+                "birthday", "last_contact", "next_contact"]
+main_menu_options = list(main_menu.keys())
+project_name = "CRaM 2023"
 
 # main menu dict
 main_menu = { "1": "View Contacts",
@@ -19,12 +20,6 @@ main_menu = { "1": "View Contacts",
               "0": "Quit CRaM",
              }
 
-
-cram_columns = ["first_name", "last_name", "phone", "company", "email", 
-                "birthday", "last_contact", "next_contact"]
-main_menu_options = list(main_menu.keys())
-
-project_name = "CRaM 2023"
 
 # Creates standard centred underline
 def underline_centre():
@@ -45,7 +40,6 @@ def clear_temp():
         writer = csv.writer(f)
         writer.writerow(cram_columns)
         f.close()
-    
 
 def file_check():
     try:
@@ -84,7 +78,6 @@ def remove_duplicates():
     df.drop_duplicates(subset=None, keep="first", inplace=True)
     # Write to clean temp file
     df.to_csv(df_temp_clean, index=False)
-
 
 # function to display search results from temp csv file
 def display_search():

@@ -1,19 +1,14 @@
 # 345678901234567890123456789012345678901234567890123456789012345678900123456789
 import pandas as pd
 import time
-
 import menu_modules.help as help
 import menu_modules.shared_variables as shvar
 
-
 cram_storage_view = pd.read_csv(shvar.cram_storage_file)
-
 
 ################################################################################
 # Search sequence
 ################################################################################
-
-
 
 # function to display search results from temp csv file
 def display_search():
@@ -111,6 +106,7 @@ def action_view_menu(menu_selection):
 ################################################################################
 # View Menu Flow
 ################################################################################
+
 
 def view_flow():
     menu_selection = ""
