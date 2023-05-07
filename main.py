@@ -12,37 +12,26 @@ import menu_modules.shared_variables as shvar
 import sys
 import os
 import time
-import csv
-import pandas as pd
 
 
-#######################################################################################################
+################################################################################
 # Main Menu
-#######################################################################################################
-
-
+################################################################################
 
 # Variables and contastant definitions
-
 invalid_selection = "That is not an option. Please try again."
 upcoming_brithdays = []
 upcoming_contacts = []
 # cram_columns imported from view.py
 # cram_storage_file imported from view.py
 
-
-# Creates standard centred underline
-def underline_centre():
-    project_underline = 12 * "="
-    print(f"{project_underline.center(80)}\n")
-
 # Clears terminal and presents welcome message
 def welcome():
     project_welcome = f"Welcome to CRaM, the best CRM in 2023."
     os.system('clear')
-    underline_centre()
+    shvar.underline_centre()
     print(f"{project_welcome.center(80)}\n")
-    underline_centre()
+    shvar.underline_centre()
 
 # presents main menu and takes input
 def main_menu_selection():
@@ -67,7 +56,8 @@ def action_main_menu(menu_selection):
         add.add_flow()
         # break
     elif menu_selection == shvar.main_menu_options[2]: # Edit
-        print(f"action_main_menu: {menu_selection}") # test
+        print(f"Edit a contact.") # test
+        edit.edit_flow()
         # break
     elif menu_selection == shvar.main_menu_options[3]: # Help
         os.system("clear")
@@ -80,11 +70,9 @@ def action_main_menu(menu_selection):
         sys.exit()
 
 
-#######################################################################################################
+################################################################################
 # Main menu flow
-#######################################################################################################
-
-# checks if cram_storage.csv exists
+################################################################################
 
 
 def main_flow():

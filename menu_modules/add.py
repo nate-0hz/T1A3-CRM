@@ -1,6 +1,6 @@
 import pandas as pd
 import csv
-import os
+import time
 import dateutil.parser
 
 import menu_modules.help as help
@@ -28,8 +28,12 @@ def add_entry():
                     if add_new == "yes":
                         gather_details(first_name, last_name)
                         # add_another()
-                    else:
+                    elif add_new == "no":
                         return
+                    else:
+                        print("Invalid input. Starting again.")
+                        time.sleep(1)
+                        continue
                 else:
                     gather_details(first_name, last_name)
                     # add_another()

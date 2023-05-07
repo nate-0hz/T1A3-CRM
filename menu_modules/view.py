@@ -7,17 +7,12 @@ import menu_modules.help as help
 import menu_modules.shared_variables as shvar
 
 
-
-invalid_selection = "That is not an option. Please try again."
 cram_storage_view = pd.read_csv(shvar.cram_storage_file)
 
-def clear_terminal(): 
-    os.system("clear")
 
-
-#######################################################################################################
+################################################################################
 # Search sequence
-#######################################################################################################
+################################################################################
 
 # # function to clear temp csv file
 # def clear_temp():
@@ -57,7 +52,7 @@ def display_search():
     if df.empty == False:
         print(df)
         input("Press enter to continue ... ")
-        clear_terminal()
+        shvar.clear_terminal()
     else:
         print("No matches found.")
 
@@ -67,13 +62,13 @@ def execute_search():
     shvar.remove_duplicates()
     shvar.display_search()
 
-#######################################################################################################
+################################################################################
 # Display Records sequence
-#######################################################################################################
+################################################################################
 
 def view_all_with_sort():
     cram_storage_view = pd.read_csv(shvar.cram_storage_file)
-    clear_terminal()
+    shvar.clear_terminal()
     for column in shvar.cram_columns:
         print(f" {int(shvar.cram_columns.index(column)) +1 }. To sort by {column}") # start menu options at 1
     print(" 9. Help\n", "0. Go back")
@@ -83,26 +78,26 @@ def view_all_with_sort():
                                 axis=0,
                                 ascending=[True],
                                 inplace=True)
-        clear_terminal()
+        shvar.clear_terminal()
         pd.options.display.max_rows = None
         pd.options.display.width = None
         print(cram_storage_view)
         print(f"\n{len(cram_storage_view)} records, ordered by {shvar.cram_columns[sort_by]}.")
         input("\nPress enter to continue ... ")
     elif (sort_by) == 8:
-        clear_terminal()
+        shvar.clear_terminal()
         help.view_all_help.display_help()
         input("\nPress enter to continue ... ")
-        clear_terminal()
+        shvar.clear_terminal()
     elif sort_by == -1:
         return
     else:
-        print(f"\n{invalid_selection}\n")
+        print(f"\n{shvar.invalid_selection}\n")
         time.sleep(1)
 
-#######################################################################################################
+################################################################################
 # View Records Sub-Menu
-#######################################################################################################
+################################################################################
 
 view_menu = { "1": "View all Contacts",
               "2": "Search Contacts",
@@ -120,35 +115,35 @@ def view_menu_selection():
     if view_selection in view_menu_options:
         return(view_selection)
     else:
-        print(f"\n{invalid_selection}\n")
+        print(f"\n{shvar.invalid_selection}\n")
         time.sleep(1)
 
 def action_view_menu(menu_selection):
-    clear_terminal()
+    shvar.clear_terminal()
     if menu_selection == view_menu_options[0]: # View all
         view_all_with_sort()
     elif menu_selection == view_menu_options[1]: # Search
         print("Search contacts.")
         execute_search()
     elif menu_selection == view_menu_options[2]: # Help
-        clear_terminal()
+        shvar.clear_terminal()
         help.view_menu_help.display_help()
         input("\nPress enter to continue ... ")
-        clear_terminal()
+        shvar.clear_terminal()
     elif menu_selection == view_menu_options[3]: # Go back
         print()
     else:
-        print(f"\n{invalid_selection}\n")
+        print(f"\n{shvar.invalid_selection}\n")
         time.sleep(1)
 
-#######################################################################################################
+################################################################################
 # View Menu Flow
-#######################################################################################################
+################################################################################
 
 def view_flow():
     menu_selection = ""
     while menu_selection != "0":
-        clear_terminal()
+        shvar.clear_terminal()
         menu_selection = view_menu_selection()
         action_view_menu(menu_selection)
     return

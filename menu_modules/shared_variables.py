@@ -4,9 +4,10 @@ import csv
 import sys
 
 
-cram_storage_file = "../data_files/cram_storage.csv"
-df_temp = "../data_files/cram_storage_temp.csv"
-df_temp_clean = "../data_files/cram_storage_temp_clean.csv"
+cram_storage_file = "./data_files/cram_storage.csv"
+df_temp = "./data_files/cram_storage_temp.csv"
+df_temp_clean = "./data_files/cram_storage_temp_clean.csv"
+invalid_selection = "That is not an option. Please try again."
 
 
 # main menu dict
@@ -21,31 +22,17 @@ main_menu = { "1": "View Contacts",
 cram_columns = ["first_name", "last_name", "phone", "company", "email", "birthday", "last_contact", "next_contact"]
 main_menu_options = list(main_menu.keys())
 
-# # passing over FileNotFoundError as if cram_storage_file does not exist, it will be created in file_check()
-# try:
-#     cram_storage_read = open(cram_storage_file, "r")
-# except FileNotFoundError:
-#     pass
+project_name = "CRaM 2023"
 
-# # try:
-# #     cram_storage_append = open(cram_storage_file, "a")
-# # except FileNotFoundError:
-# #     pass
+# Creates standard centred underline
+def underline_centre():
+    project_underline = 12 * "="
+    print(f"{project_underline.center(80)}\n")
 
-# # try:
-# #     cram_storage_write = open(cram_storage_file, "w")
-# # except FileNotFoundError:
-# #     pass
-
-# # also passes FileNotFoundError, along with Attribute and empty data error
-# try:
-#     cram_storage_view = pd.read_csv(cram_storage_file)
-# except FileNotFoundError:
-#     pass
-# except AttributeError:
-#     pass
-# except pd.errors.EmptyDataError:
-#     pass
+def welcome(page):
+    underline_centre()
+    print(f"{page(80)}\n")
+    underline_centre()
 
 def clear_terminal(): 
     os.system("clear")
@@ -73,7 +60,7 @@ def file_check():
 
 # function to search for sub-string in csv file and add rows to temp csv file
 def search_sub():
-    search = input("Type what you would like to search for: ")
+    search = input("Type text to search for: ")
     # Clear temp file
     clear_temp()
     # Read storage file
