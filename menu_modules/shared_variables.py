@@ -1,3 +1,4 @@
+# 345678901234567890123456789012345678901234567890123456789012345678900123456789
 import pandas as pd
 import os
 import csv
@@ -19,7 +20,8 @@ main_menu = { "1": "View Contacts",
              }
 
 
-cram_columns = ["first_name", "last_name", "phone", "company", "email", "birthday", "last_contact", "next_contact"]
+cram_columns = ["first_name", "last_name", "phone", "company", "email", 
+                "birthday", "last_contact", "next_contact"]
 main_menu_options = list(main_menu.keys())
 
 project_name = "CRaM 2023"
@@ -58,7 +60,7 @@ def file_check():
     finally:
         return
 
-# function to search for sub-string in csv file and add rows to temp csv file
+# function to search for sub-string in csv file and add rows to temp csv
 def search_sub():
     search = input("Type text to search for: ")
     # Clear temp file
@@ -69,12 +71,13 @@ def search_sub():
         reader.__next__()
         for row in reader:
             for i in row:
-                if i.find(search) != -1 or i.find(search.capitalize()) != -1 or i.find(search.lower()) != -1 or i.find(search.upper()) != -1:
+                if i.find(search) != -1 or i.find(search.capitalize()) != -1 or \
+                    i.find(search.lower()) != -1 or i.find(search.upper()) != -1:
                     with open(df_temp, "a") as file_temp:
                         writer = csv.writer(file_temp)
                         writer.writerow(row)
 
-# function to remove duplicates from temp csv file and write to clean temp csv file
+# function to remove duplicates from temp csv file and write to clean temp csv
 def remove_duplicates():
     # Read temp file
     df = pd.read_csv(df_temp, sep=",")

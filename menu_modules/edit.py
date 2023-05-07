@@ -1,3 +1,4 @@
+# 345678901234567890123456789012345678901234567890123456789012345678900123456789
 import pandas as pd
 import time
 
@@ -34,7 +35,8 @@ def edit_record(editing_dict, chosen_record):
     temp_list = []
     i = 0
     for key in editing_dict:
-        value = input(f"Current {key} is {editing_dict[key]}. New value (or press enter to keep): ")
+        value = input(f"Current {key} is {editing_dict[key]}. \
+                      New value (or press enter to keep): ")
         if value == "":
             temp_list.insert(i, chosen_record[i])
         else:
@@ -43,7 +45,11 @@ def edit_record(editing_dict, chosen_record):
 
     # find and update record in cram_storage_file
     df = pd.read_csv(shvar.cram_storage_file)
-    mask = (df['first_name'] == chosen_record[0]) & (df['last_name'] == chosen_record[1]) & (df['phone'] == chosen_record[2]) & (df['company'] == chosen_record[3]) & (df['email'] == chosen_record[4]) & (df['birthday'] == chosen_record[5]) & (df['last_contact'] == chosen_record[6]) & (df['next_contact'] == chosen_record[7])
+    mask = (df['first_name'] == chosen_record[0]) & (df['last_name'] == chosen_record[1]) \
+        & (df['phone'] == chosen_record[2]) & (df['company'] == chosen_record[3]) \
+        & (df['email'] == chosen_record[4]) & (df['birthday'] == chosen_record[5]) \
+        & (df['last_contact'] == chosen_record[6]) \
+        & (df['next_contact'] == chosen_record[7])
     df.loc[mask] = temp_list
     df.to_csv(shvar.cram_storage_file, index=False)
     print("\nRecord updated. Returning to Main Menu.")
